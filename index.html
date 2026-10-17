@@ -3,9 +3,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Ôn tập dịch HSK 2</title>
 <style>
-:root{--bg:#eef3f6;--ink:#14212b;--mut:#5d7080;--card:#fff;--line:#cfdbe3;--ac:#0e7490;--on:#fff;--hl:#fff1b8;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a21;--ink:#e6eff4;--mut:#93a8b6;--card:#16262f;--line:#2a3e4b;--ac:#5ad1e6;--on:#05222a;--hl:#40380f}}
-:root[data-theme="dark"]{--bg:#0e1a21;--ink:#e6eff4;--mut:#93a8b6;--card:#16262f;--line:#2a3e4b;--ac:#5ad1e6;--on:#05222a;--hl:#40380f}
+:root{--bg:#eef3f6;--ink:#14212b;--mut:#5d7080;--card:#fff;--line:#cfdbe3;--ac:#0e7490;--on:#fff;--hl:#fff1b8;--ok:#15803d;--bad:#dc2626;--okt:#d7f5e1;--okx:#0b5a2a;--badt:#fde0e0;--badx:#8f1313;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1a21;--ink:#e6eff4;--mut:#93a8b6;--card:#16262f;--line:#2a3e4b;--ac:#5ad1e6;--on:#05222a;--hl:#40380f;--okt:#14472b;--okx:#a7f3c4;--badt:#561a1a;--badx:#fecaca}}
+:root[data-theme="dark"]{--bg:#0e1a21;--ink:#e6eff4;--mut:#93a8b6;--card:#16262f;--line:#2a3e4b;--ac:#5ad1e6;--on:#05222a;--hl:#40380f;--okt:#14472b;--okx:#a7f3c4;--badt:#561a1a;--badx:#fecaca}
 *{box-sizing:border-box}html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 main{max-width:760px;margin:0 auto;padding:16px}
@@ -16,6 +16,8 @@ button{cursor:pointer}
 button[aria-pressed="true"],button.on{background:var(--ac);color:var(--on);border-color:var(--ac)}
 :focus-visible{outline:3px solid var(--ac);outline-offset:2px}
 #grid button{min-width:40px;padding:6px 0}
+#grid button.ok{box-shadow:inset 0 -4px 0 var(--ok)}
+#grid button.bad{box-shadow:inset 0 -4px 0 var(--bad)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px;margin:12px 0}
 .lab{font-size:.85rem;color:var(--mut);margin:0 0 4px}
 .zh{font:1.6rem/1.7 "Songti SC","Noto Serif CJK SC","Source Han Serif SC",serif;margin:0 0 14px}
@@ -26,10 +28,32 @@ button[aria-pressed="true"],button.on{background:var(--ac);color:var(--on);borde
 .seg:hover,.seg.on{background:var(--hl)}
 .hid{color:var(--mut);margin:0 0 14px}
 label{font-size:.9rem;color:var(--mut)}
-input[type=range]{flex:1;min-width:160px;accent-color:var(--ac)}
+input[type=range]{flex:1;min-width:160px;height:32px;accent-color:var(--ac)}
 textarea{width:100%;min-height:90px;font:inherit;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:8px}
 #warn,#msg{color:var(--mut);font-size:.9rem;margin:6px 0}
 .it{border-top:1px solid var(--line);padding:12px 0}.it:first-child{border-top:0;padding-top:0}.it .lab{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.it button{min-height:32px;padding:2px 10px;font-size:.85rem}.it .zh{font-size:1.3rem;margin-bottom:6px}.it .vi{margin-bottom:6px}.pyl{color:var(--mut);font-size:.9rem;margin:0}
+/* khung viết đáp án */
+#ans{min-height:72px;border-width:2px}
+#ans.ok{border-color:var(--ok)}
+#ans.bad{border-color:var(--bad)}
+.rs{border-radius:10px;padding:10px 14px;margin:10px 0;color:#fff;font-weight:700;font-size:1.05rem}
+.rs.ok{background:var(--ok)}
+.rs.bad{background:var(--bad)}
+.rs.nt{background:var(--card);color:var(--mut);border:1px solid var(--line);font-weight:400}
+.dk{border-radius:4px;padding:1px 2px;margin:0 1px}
+.dk.y{background:var(--okt);color:var(--okx)}
+.dk.n{background:var(--badt);color:var(--badx);text-decoration:line-through}
+.zh.cmp{font-size:1.3rem;line-height:1.9;margin-bottom:8px}
+.vi.cmp{line-height:1.9;margin-bottom:8px}
+#sc{color:var(--mut);font-size:.9rem}
+/* thanh nghe liền */
+.pl{border-top:1px solid var(--line);margin-top:10px;padding-top:6px}
+#pp{min-width:48px}
+#rl{min-width:3.2em;text-align:right;color:var(--mut);font-size:.9rem}
+#rt{margin:8px 0 0}
+#rt.rtz{font:1.2rem/1.8 "Songti SC","Noto Serif CJK SC","Source Han Serif SC",serif}
+#rt.rtv{font-size:1rem}
+.pd{background:var(--hl);border-radius:4px}
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style></head><body><main>
 <h1>Ôn tập dịch Việt–Trung, Trung–Việt</h1>
@@ -37,20 +61,35 @@ textarea{width:100%;min-height:90px;font:inherit;background:var(--card);color:va
 <button data-m="vz">Việt → Trung</button><button data-m="zv">Trung → Việt</button><button data-m="ls">Chỉ nghe</button><button data-m="all">Xem tất cả</button>
 <button id="pyb" aria-pressed="false">Pinyin</button><button id="rvb">Hiện đáp án</button>
 </div>
-<div class="row" id="lvs"><label>Mức độ</label><button data-lv="all">Tất cả</button><button data-lv="e">Dễ</button><button data-lv="m">Vừa</button><button data-lv="h">Khó</button></div>
+<div class="row" id="lvs"><label>Mức độ</label><button data-lv="all">Tất cả</button><button data-lv="e">Dễ</button><button data-lv="k">Khá dễ</button><button data-lv="m">Vừa</button><button data-lv="h">Khó</button></div>
 <div class="row"><button id="pv">‹ Câu trước</button><span id="cnt"></span><button id="nx">Câu sau ›</button></div>
 <div class="row" id="grid" aria-label="Chọn câu"></div>
 <div class="card" id="card"></div>
+
+<div class="card" id="pr">
+<p class="lab" id="prl"></p>
+<textarea id="ans" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false" aria-label="Câu trả lời của bạn"></textarea>
+<div class="row"><button id="ck">Kiểm tra</button><button id="cl">Xóa</button><label for="tol">Cách chấm</label>
+<select id="tol"><option value="1">Chính xác</option><option value="0.85">Gần đúng (từ 85%)</option></select></div>
+<div id="res" role="status" aria-live="polite"></div>
+<div class="row"><span id="sc"></span><button id="rsb">Làm lại điểm</button></div>
+</div>
+
 <div class="card">
 <div class="row"><button id="sv">Đọc tiếng Việt</button><button id="sz">Đọc tiếng Trung</button><button id="sb">Việt rồi Trung</button><button id="st">Dừng</button></div>
 <div class="row"><label for="sp">Tốc độ tiếng Trung</label>
 <select id="sp"><option value="0.5">Rất chậm</option><option value="0.65">Chậm</option><option value="0.8" selected>Hơi chậm</option><option value="1">Bình thường</option></select></div>
-<div class="row"><label for="rg">Đọc từ đoạn</label><input type="range" id="rg" min="0" max="0" value="0"><span id="rl"></span></div>
+<div class="pl">
+<div class="row"><label>Thanh tua cho</label><button data-tk="z" aria-pressed="true">Tiếng Trung</button><button data-tk="v" aria-pressed="false">Tiếng Việt</button></div>
+<div class="row"><button id="pp" aria-label="Phát">▶</button><input type="range" id="rg" min="0" max="0" value="0" step="1" aria-label="Tua đến chỗ muốn nghe"><span id="rl">0%</span></div>
+<p class="pyl">Kéo thanh đến chỗ muốn nghe rồi thả tay, âm thanh sẽ phát từ đúng chỗ đó.</p>
+<p id="rt" hidden></p>
+</div>
 <div class="row"><label for="zv">Giọng Trung</label><select id="zv"></select><label for="vv">Giọng Việt</label><select id="vv"></select></div>
 <div id="warn"></div>
 </div>
 <details class="card"><summary>Thêm câu mới</summary>
-<p class="lab">Mỗi dòng một câu: 中文 | pinyin | Tiếng Việt | e, m hoặc h (dễ, vừa, khó; có thể bỏ trống)</p>
+<p class="lab">Mỗi dòng một câu: 中文 | pinyin | Tiếng Việt | e, k, m hoặc h (dễ, khá dễ, vừa, khó; có thể bỏ trống)</p>
 <textarea id="ta"></textarea>
 <div class="row"><button id="add">Thêm vào bộ câu</button><button id="clr">Xóa câu đã thêm</button></div><div id="msg"></div>
 </details>
@@ -76,57 +115,156 @@ const easy=[
 ["他生病了，要多休息。","Tā shēngbìng le, yào duō xiūxi.","Anh ấy bị ốm rồi, phải nghỉ ngơi nhiều."],
 ["这个电话是谁打的？","Zhège diànhuà shì shéi dǎ de?","Cuộc điện thoại này là ai gọi?"],
 ["左边那个书包是我的。","Zuǒbian nàge shūbāo shì wǒ de.","Cái cặp bên trái là của tôi."]];
+/* Mức "Khá dễ": ngắn, khó hơn mức Dễ, dễ hơn mức Vừa */
+const kd=[
+["这块手表是我爸爸送给我的。","Zhè kuài shǒubiǎo shì wǒ bàba sòng gěi wǒ de.","Chiếc đồng hồ này là bố tôi tặng tôi."],
+["今天早上妈妈给我打了一个电话。","Jīntiān zǎoshang māma gěi wǒ dǎ le yí gè diànhuà.","Sáng nay mẹ gọi cho tôi một cuộc điện thoại."],
+["我去年开始跑步，身体好多了。","Wǒ qùnián kāishǐ pǎobù, shēntǐ hǎoduō le.","Tôi bắt đầu chạy bộ từ năm ngoái, sức khỏe tốt hơn nhiều rồi."],
+["这个书包是昨天买的，两百多块。","Zhège shūbāo shì zuótiān mǎi de, liǎng bǎi duō kuài.","Cái cặp này mua hôm qua, hơn hai trăm tệ."],
+["我在公司工作两年了，每天都很忙。","Wǒ zài gōngsī gōngzuò liǎng nián le, měitiān dōu hěn máng.","Tôi làm ở công ty hai năm rồi, ngày nào cũng rất bận."],
+["我想九月去北京，那儿的天气很好。","Wǒ xiǎng jiǔ yuè qù Běijīng, nàr de tiānqì hěn hǎo.","Tôi muốn tháng 9 đi Bắc Kinh, thời tiết ở đó rất đẹp."],
+["我的猫喜欢在椅子上休息。","Wǒ de māo xǐhuān zài yǐzi shang xiūxi.","Con mèo của tôi thích nghỉ ngơi trên ghế."],
+["医生给我开了药，晚上要吃。","Yīshēng gěi wǒ kāi le yào, wǎnshang yào chī.","Bác sĩ kê thuốc cho tôi, buổi tối phải uống."],
+["昨天晚上朋友给我打电话，我没接。","Zuótiān wǎnshang péngyou gěi wǒ dǎ diànhuà, wǒ méi jiē.","Tối qua bạn gọi điện cho tôi, tôi không nghe máy."],
+["我丈夫每天晚上都帮我做饭。","Wǒ zhàngfu měitiān wǎnshang dōu bāng wǒ zuòfàn.","Chồng tôi tối nào cũng giúp tôi nấu cơm."],
+["他今天不太高兴，因为他生病了。","Tā jīntiān bú tài gāoxìng, yīnwèi tā shēngbìng le.","Hôm nay anh ấy không vui lắm, vì anh ấy bị ốm."],
+["我和同学一起在操场踢足球。","Wǒ hé tóngxué yìqǐ zài cāochǎng tī zúqiú.","Tôi cùng bạn học đá bóng ở sân vận động."],
+["这个红色的杯子要二十块，不太贵。","Zhège hóngsè de bēizi yào èrshí kuài, bú tài guì.","Cái cốc màu đỏ này giá 20 tệ, không đắt lắm."],
+["我儿子十一岁，他喜欢喝牛奶。","Wǒ érzi shíyī suì, tā xǐhuān hē niúnǎi.","Con trai tôi 11 tuổi, nó thích uống sữa."],
+["明天下午我想去商店看一下手表。","Míngtiān xiàwǔ wǒ xiǎng qù shāngdiàn kàn yíxià shǒubiǎo.","Chiều mai tôi muốn đi cửa hàng xem đồng hồ một chút."],
+["这个工作是朋友帮我介绍的。","Zhège gōngzuò shì péngyou bāng wǒ jièshào de.","Công việc này là bạn giúp tôi giới thiệu."]];
 const hard=[
 ["我是十八岁的时候一个人来到北京的，已经在这儿住了十年了，每年九月我都和朋友一起去旅游，因为那个时候的天气不冷也不热，我们都觉得最好。","Wǒ shì shíbā suì de shíhou yí gè rén láidào Běijīng de, yǐjīng zài zhèr zhù le shí nián le, měinián jiǔ yuè wǒ dōu hé péngyou yìqǐ qù lǚyóu, yīnwèi nàge shíhou de tiānqì bù lěng yě bú rè, wǒmen dōu juéde zuì hǎo.","Tôi là lúc 18 tuổi một mình đến Bắc Kinh, đã sống ở đây mười năm rồi, tháng 9 hằng năm tôi đều cùng bạn đi du lịch, vì lúc đó thời tiết không lạnh cũng không nóng, chúng tôi đều thấy là tốt nhất."],
 ["上个星期我生病的时候，是朋友帮我给医生打的电话，医生给我开了药，说我要在家休息一个星期，今天身体已经好多了，明天我想开始去公司工作。","Shàng gè xīngqī wǒ shēngbìng de shíhou, shì péngyou bāng wǒ gěi yīshēng dǎ de diànhuà, yīshēng gěi wǒ kāi le yào, shuō wǒ yào zài jiā xiūxi yí gè xīngqī, jīntiān shēntǐ yǐjīng hǎoduō le, míngtiān wǒ xiǎng kāishǐ qù gōngsī gōngzuò.","Tuần trước lúc tôi bị ốm, là bạn giúp tôi gọi điện cho bác sĩ, bác sĩ kê thuốc cho tôi, nói tôi phải ở nhà nghỉ ngơi một tuần, hôm nay sức khỏe đã khá hơn nhiều, ngày mai tôi muốn bắt đầu đến công ty làm việc."],
 ["下个星期六是妈妈的生日，我想送她一块粉色的手表，要两千多块，比较贵，我丈夫说粉色的真好看，明天下午我们一起去商店看一下，你也来吧。","Xià gè xīngqīliù shì māma de shēngrì, wǒ xiǎng sòng tā yí kuài fěnsè de shǒubiǎo, yào liǎng qiān duō kuài, bǐjiào guì, wǒ zhàngfu shuō fěnsè de zhēn hǎokàn, míngtiān xiàwǔ wǒmen yìqǐ qù shāngdiàn kàn yíxià, nǐ yě lái ba.","Thứ bảy tuần sau là sinh nhật mẹ tôi, tôi muốn tặng mẹ một chiếc đồng hồ màu hồng, hơn hai nghìn tệ, khá đắt, chồng tôi nói màu hồng đẹp thật, chiều mai chúng tôi cùng đi cửa hàng xem một chút, bạn cũng đến nhé."],
 ["我儿子十一岁的时候开始踢足球，已经踢了三年了，他高一米五，眼睛很大，每个星期六下午都和同学一起在操场踢，晚上回家喝一杯牛奶，非常高兴。","Wǒ érzi shíyī suì de shíhou kāishǐ tī zúqiú, yǐjīng tī le sān nián le, tā gāo yì mǐ wǔ, yǎnjing hěn dà, měi gè xīngqīliù xiàwǔ dōu hé tóngxué yìqǐ zài cāochǎng tī, wǎnshang huí jiā hē yì bēi niúnǎi, fēicháng gāoxìng.","Con trai tôi bắt đầu đá bóng lúc 11 tuổi, đã đá được ba năm rồi, cao 1 mét 5, mắt rất to, thứ bảy nào buổi chiều cũng cùng bạn học đá ở sân vận động, tối về nhà uống một cốc sữa, vô cùng vui."]];
-const base=[...easy.map(a=>a.concat('e')),...mid.map(a=>a.concat('m')),...hard.map(a=>a.concat('h'))],LN={e:'Dễ',m:'Vừa',h:'Khó'};
+const base=[...easy.map(a=>a.concat('e')),...kd.map(a=>a.concat('k')),...mid.map(a=>a.concat('m')),...hard.map(a=>a.concat('h'))],LN={e:'Dễ',k:'Khá dễ',m:'Vừa',h:'Khó'};
 let EX=[];try{EX=JSON.parse(localStorage.getItem('hsk2x')||'[]')}catch(e){}
-let LV='all',ALL,D,i=0,mode='vz',py=false,rev=false,k=0,VO=[];
+let LV='all',ALL,D,i=0,mode='vz',py=false,rev=false,VO=[],tk='z',DONE={};
 function setD(){ALL=base.concat(EX);D=LV=='all'?ALL:ALL.filter(s=>(s[3]||'m')==LV)}
 setD();
 const $=id=>document.getElementById(id),E=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const cz=s=>s.match(/[^，。？！]+[，。？！]?/g)||[s],cp=s=>(s||'').match(/[^,.?!]+[,.?!]?\s*/g)||[],cv=s=>s.match(/[^,.?!]+[,.?!]?\s*/g)||[s];
+const RZ=/[^，。？！]+[，。？！]?/g,RV=/[^,.?!]+[,.?!]?\s*/g;
+const cz=s=>s.match(RZ)||[s],cp=s=>(s||'').match(/[^,.?!]+[,.?!]?\s*/g)||[],cv=s=>s.match(RV)||[s];
+const ix=(s,re)=>[...s.matchAll(re)].map(m=>m.index);
+const segIdx=(s,re,pos)=>{let r=0;ix(s,re).forEach((o,n)=>{if(o<=pos)r=n});return r};
 const TTS=window.speechSynthesis;
+
+/* ===== Nghe: một thanh liền cho cả câu, tua theo từng chữ ===== */
+const T={pos:0,p0:0,t0:0,id:0,bd:false,playing:false,ch:0,u:null};
+const txt=l=>l=='z'?D[i][0]:D[i][2];
+const vis=l=>mode=='all'||rev||(mode=='vz'&&l=='v')||(mode=='zv'&&l=='z');
+function hl(){const s=txt(tk),on=(T.playing||T.pos>0)?segIdx(s,tk=='z'?RZ:RV,T.pos):-1;
+document.querySelectorAll('#card .seg').forEach(e=>e.classList.toggle('on',e.dataset.l==tk&&+e.dataset.k==on))}
+function ui(){
+const s=txt(tk),len=s.length,p=Math.min(T.pos,len),r=$('rg');
+r.max=len;r.value=p;
+$('rl').textContent=(len?Math.round(p/len*100):0)+'%';
+$('pp').textContent=T.playing?'⏸':'▶';$('pp').setAttribute('aria-label',T.playing?'Dừng':'Phát');
+document.querySelectorAll('[data-tk]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tk==tk));
+const rt=$('rt'),sh=vis(tk);rt.hidden=!sh;
+if(sh){rt.className=tk=='z'?'rtz':'rtv';rt.innerHTML='<span class="pd">'+E(s.slice(0,p))+'</span>'+E(s.slice(p))}
+hl()}
+function stop(){T.id++;clearTimeout(T.ch);if(TTS)TTS.cancel();T.playing=false;ui()}
+function play(l,pos,cb){
+if(!TTS)return;
+tk=l;const s=txt(l),len=s.length;pos=pos>=len?0:Math.max(0,pos|0);
+T.pos=pos;stop();
+const id=++T.id,z=l=='z',u=new SpeechSynthesisUtterance(s.slice(pos));
+u.lang=z?'zh-CN':'vi-VN';u.rate=z?+$('sp').value:1;
+const vo=VO.find(x=>x.name==$(z?'zv':'vv').value);if(vo)u.voice=vo;
+T.p0=pos;T.bd=false;T.playing=true;T.t0=performance.now();T.u=u;
+u.onstart=()=>{if(id==T.id)T.t0=performance.now()};
+u.onboundary=e=>{if(id==T.id){T.bd=true;T.pos=Math.min(pos+e.charIndex,len-1);ui()}};
+u.onend=()=>{if(id!=T.id)return;T.playing=false;T.pos=len;ui();if(cb)T.ch=setTimeout(cb,500)};
+u.onerror=()=>{if(id==T.id){T.playing=false;ui()}};
+setTimeout(()=>{if(id==T.id)TTS.speak(u)},60);
+ui()}
+/* Nếu giọng đọc của thiết bị không báo vị trí (onboundary), thanh chạy theo ước lượng thời gian */
+setInterval(()=>{if(!T.playing||T.bd)return;const len=txt(tk).length,z=tk=='z',cps=(z?4:14)*(z?+$('sp').value:1);
+T.pos=Math.min(len-1,T.p0+Math.floor((performance.now()-T.t0)/1000*cps));ui()},120);
+const pb=()=>play('v',0,()=>play('z',0));
+
+/* ===== Hiển thị ===== */
 function render(){
-const[z,p,v]=D[i],Z=cz(z),P=cp(p);if(k>=Z.length)k=0;
-const zh='<p class="zh">'+Z.map((c,n)=>`<span class="seg${n==k?' on':''}" data-l="z" data-k="${n}">${E(c)}<small>${py?E((P[n]||'').trim()):''}</small></span>`).join('')+'</p>';
+const[z,p,v]=D[i],Z=cz(z),P=cp(p);
+const zh='<p class="zh">'+Z.map((c,n)=>`<span class="seg" data-l="z" data-k="${n}">${E(c)}<small>${py?E((P[n]||'').trim()):''}</small></span>`).join('')+'</p>';
 const vi='<p class="vi">'+cv(v).map((c,n)=>`<span class="seg" data-l="v" data-k="${n}">${E(c)}</span>`).join('')+'</p>';
 let h;
 if(mode=='all')h=D.map((s,n)=>`<div class="it"><p class="lab">Câu ${n+1} (${LN[s[3]||'m']}) <button data-p="v" data-i="${n}">Đọc Việt</button> <button data-p="z" data-i="${n}">Đọc Trung</button> <button data-g="${n}">Luyện câu này</button></p><p class="vi">${E(s[2])}</p><p class="zh">${E(s[0])}</p>${py?`<p class="pyl">${E(s[1])}</p>`:''}</div>`).join('');
-else if(mode=='ls')h=rev?`<p class="lab">Tiếng Trung</p>${zh}<p class="lab">Tiếng Việt</p>${vi}`:'<p class="lab">Chế độ nghe</p><p class="hid">Chữ đang ẩn. Bấm nút để nghe.</p>';
+else if(mode=='ls')h=rev?`<p class="lab">Tiếng Trung</p>${zh}<p class="lab">Tiếng Việt</p>${vi}`:'<p class="lab">Chế độ nghe</p><p class="hid">Chữ đang ẩn. Bấm nút để nghe, rồi chép lại câu tiếng Trung vào ô bên dưới.</p>';
 else{const vz=mode=='vz';h=`<p class="lab">${vz?'Tiếng Việt: dịch sang tiếng Trung':'Tiếng Trung: dịch sang tiếng Việt'}</p>${vz?vi:zh}<p class="lab">${vz?'Đáp án tiếng Trung':'Đáp án tiếng Việt'}</p>${rev?(vz?zh:vi):'<p class="hid">Chưa hiện đáp án.</p>'}`}
 $('card').innerHTML=h;
-$('rg').max=Z.length-1;$('rg').value=k;$('rl').textContent=`${k+1}/${Z.length}`;
 $('rvb').textContent=mode=='ls'?(rev?'Ẩn chữ':'Hiện chữ'):(rev?'Ẩn đáp án':'Hiện đáp án');
 $('pyb').setAttribute('aria-pressed',py);$('rvb').hidden=mode=='all';
 document.querySelectorAll('[data-m]').forEach(b=>b.classList.toggle('on',b.dataset.m==mode));
 document.querySelectorAll('[data-lv]').forEach(b=>b.classList.toggle('on',b.dataset.lv==LV));
 $('cnt').textContent=`Câu ${i+1}/${D.length} (${LN[D[i][3]||'m']})`;
-$('grid').innerHTML=D.map((_,n)=>`<button class="${n==i?'on':''}" data-n="${n}" aria-label="Câu ${n+1}">${n+1}</button>`).join('');
-}
-function say(t,l,cb){if(!TTS)return;const u=new SpeechSynthesisUtterance(t),z=l=='z';u.lang=z?'zh-CN':'vi-VN';u.rate=z?+$('sp').value:1;const v=VO.find(x=>x.name==$(z?'zv':'vv').value);if(v)u.voice=v;if(cb)u.onend=cb;setTimeout(()=>TTS.speak(u),60)}
-const stop=()=>TTS&&TTS.cancel();
-function pz(n){stop();say(cz(D[i][0]).slice(n||0).join(''),'z')}
-function pv(n){stop();say(cv(D[i][2]).slice(n||0).join(''),'v')}
-function pb(){stop();say(D[i][2],'v',()=>setTimeout(()=>say(D[i][0],'z'),500))}
-function go(n){i=(n+D.length)%D.length;k=0;rev=false;stop();render()}
+const key=s=>mode+'|'+s[0],st=n=>key(D[n]) in DONE?(DONE[key(D[n])]?'ok':'bad'):'';
+$('grid').innerHTML=D.map((_,n)=>`<button class="${[n==i?'on':'',st(n)].join(' ').trim()}" data-n="${n}" aria-label="Câu ${n+1}${st(n)=='ok'?', đã làm đúng':st(n)=='bad'?', đã làm sai':''}">${n+1}</button>`).join('');
+$('pr').hidden=mode=='all';
+const zhA=mode!='zv';
+$('prl').textContent=mode=='vz'?'Viết đáp án bằng tiếng Trung rồi bấm Kiểm tra':mode=='zv'?'Viết đáp án bằng tiếng Việt rồi bấm Kiểm tra':'Nghe rồi chép lại bằng chữ Hán, sau đó bấm Kiểm tra';
+$('ans').lang=zhA?'zh-CN':'vi';$('ans').placeholder=zhA?'Nhập chữ Hán…':'Nhập bản dịch tiếng Việt…';
+const dn=D.filter(s=>key(s) in DONE);
+$('sc').textContent=`Đã làm ${dn.length}/${D.length} câu · Đúng ${dn.filter(s=>DONE[key(s)]).length}`;
+ui()}
+
+/* ===== Viết đáp án và kiểm tra ===== */
+function tok(s,zh){
+s=String(s).normalize('NFC').replace(/[\uFF01-\uFF5E]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0));
+if(zh)return[...s.replace(/[^\p{L}\p{N}\p{M}]+/gu,'')];
+return s.toLocaleLowerCase('vi').replace(/[^\p{L}\p{N}\p{M}]+/gu,' ').trim().split(' ').filter(Boolean)}
+function lcs(a,b){
+const n=a.length,m=b.length,t=Array.from({length:n+1},()=>new Uint16Array(m+1));
+for(let x=n-1;x>=0;x--)for(let y=m-1;y>=0;y--)t[x][y]=a[x]==b[y]?t[x+1][y+1]+1:Math.max(t[x+1][y],t[x][y+1]);
+const A=Array(n).fill(0),B=Array(m).fill(0);let x=0,y=0;
+while(x<n&&y<m){if(a[x]==b[y]){A[x]=B[y]=1;x++;y++}else if(t[x+1][y]>=t[x][y+1])x++;else y++}
+return{A,B,L:t[0][0]}}
+function clr(){const a=$('ans');a.value='';a.className='';$('res').innerHTML=''}
+function chk(){
+if(mode=='all')return;
+const zh=mode!='zv',a=tok($('ans').value,zh),b=tok(zh?D[i][0]:D[i][2],zh),box=$('ans'),res=$('res');
+if(!a.length){box.className='';res.innerHTML='<div class="rs nt">Hãy nhập câu trả lời trước khi bấm Kiểm tra.</div>';return}
+const{A,B,L}=lcs(a,b),sim=2*L/(a.length+b.length),ex=L==a.length&&L==b.length,pass=ex||sim>=+$('tol').value,pc=Math.round(sim*100);
+DONE[mode+'|'+D[i][0]]=pass;
+box.className=pass?'ok':'bad';
+const msg=ex?'✓ Chính xác! Đúng rồi.':pass?`✓ Gần đúng (khớp ${pc}%). Xem chỗ khác bên dưới.`:`✗ Chưa đúng (khớp ${pc}%)`;
+let h=`<div class="rs ${pass?'ok':'bad'}">${msg}</div>`;
+if(!ex){
+const dk=a.map((t,n)=>`<span class="dk ${A[n]?'y':'n'}">${E(t)}</span>`).join(zh?'':' '),w=A.filter(x=>!x).length,lack=B.filter(x=>!x).length,u=zh?'chữ':'từ';
+h+=`<p class="lab">Bài của bạn (xanh: khớp, đỏ gạch ngang: sai hoặc thừa)</p><p class="${zh?'zh':'vi'} cmp">${dk}</p><p class="lab">Sai hoặc thừa: ${w} ${u} · Còn thiếu: ${lack} ${u}. Bấm "Hiện đáp án" nếu muốn xem đáp án.</p>`}
+res.innerHTML=h;
+if(pass)rev=true;
+render()}
+
+/* ===== Điều khiển ===== */
+function go(n){i=(n+D.length)%D.length;rev=false;T.pos=0;stop();clr();render()}
 document.addEventListener('click',e=>{const b=e.target.closest('button,.seg');if(!b)return;const d=b.dataset;
-if(d.n!=null)go(+d.n);else if(d.lv){LV=d.lv;setD();go(0)}else if(d.p){i=+d.i;k=0;d.p=='z'?pz(0):pv(0)}else if(d.g!=null){i=+d.g;k=0;rev=false;mode='vz';stop();render()}else if(d.m){mode=d.m;rev=false;stop();render()}
-else if(d.l=='z'){k=+d.k;render();pz(k)}else if(d.l=='v')pv(+d.k)});
+if(d.n!=null)go(+d.n);
+else if(d.lv){LV=d.lv;setD();go(0)}
+else if(d.tk){tk=d.tk;T.pos=0;stop()}
+else if(d.p){i=+d.i;T.pos=0;render();play(d.p,0)}
+else if(d.g!=null){i=+d.g;rev=false;mode='vz';T.pos=0;stop();clr();render()}
+else if(d.m){mode=d.m;rev=false;T.pos=0;stop();clr();render()}
+else if(d.l){const s=txt(d.l);play(d.l,ix(s,d.l=='z'?RZ:RV)[+d.k]||0)}});
 $('pv').onclick=()=>go(i-1);$('nx').onclick=()=>go(i+1);
 $('pyb').onclick=()=>{py=!py;render()};$('rvb').onclick=()=>{rev=!rev;render()};
-$('sv').onclick=()=>pv(0);$('sz').onclick=()=>pz(0);$('sb').onclick=pb;$('st').onclick=stop;
-$('rg').oninput=e=>{k=+e.target.value;$('rl').textContent=`${k+1}/${$('rg').max*1+1}`};
-$('rg').onchange=()=>{render();pz(k)};
+$('sv').onclick=()=>play('v',0);$('sz').onclick=()=>play('z',0);$('sb').onclick=pb;$('st').onclick=stop;
+$('pp').onclick=()=>T.playing?stop():play(tk,T.pos);
+$('rg').oninput=e=>{T.pos=+e.target.value;stop()};
+$('rg').onchange=e=>play(tk,+e.target.value);
+$('ck').onclick=chk;$('cl').onclick=clr;
+$('rsb').onclick=()=>{DONE={};clr();render()};
+$('ans').oninput=()=>{$('ans').className=''};
+$('ans').onkeydown=e=>{if(e.key=='Enter'&&!e.shiftKey&&!e.isComposing&&e.keyCode!=229){e.preventDefault();chk()}};
 function lv(){if(!TTS){$('warn').textContent='Trình duyệt này không hỗ trợ giọng đọc. Hãy dùng Chrome, Edge hoặc Safari.';return}
 VO=TTS.getVoices();const has=p=>VO.some(v=>v.lang.toLowerCase().replace('_','-').startsWith(p));
 [['zv','zh'],['vv','vi']].forEach(([id,p])=>{const s=$(id),c=s.value,a=VO.filter(v=>v.lang.toLowerCase().replace('_','-').startsWith(p));s.innerHTML=a.length?a.map(v=>`<option>${E(v.name)}</option>`).join(''):'<option value="">Chưa có giọng</option>';if(c)s.value=c});
 const nz=!has('zh'),nv=!has('vi');$('warn').textContent=(nz||nv)?`Thiết bị chưa có giọng ${nz?'tiếng Trung':''}${nz&&nv?' và ':''}${nv?'tiếng Việt':''}. Hãy cài giọng đọc trong cài đặt thiết bị hoặc đổi trình duyệt.`:''}
 if(TTS)TTS.onvoiceschanged=lv;lv();
 function save(){try{localStorage.setItem('hsk2x',JSON.stringify(EX))}catch(e){}}
-$('add').onclick=()=>{const r=$('ta').value.split('\n').map(l=>l.split(/[|｜]/).map(s=>s.trim())).filter(a=>a.length>=3&&a[0]&&a[2]).map(a=>a.slice(0,3).concat(/^[emh]$/i.test(a[3]||'')?a[3].toLowerCase():'m'));
+$('add').onclick=()=>{const r=$('ta').value.split('\n').map(l=>l.split(/[|｜]/).map(s=>s.trim())).filter(a=>a.length>=3&&a[0]&&a[2]).map(a=>a.slice(0,3).concat(/^[ekmh]$/i.test(a[3]||'')?a[3].toLowerCase():'m'));
 if(!r.length){$('msg').textContent='Mỗi dòng cần có dạng: 中文 | pinyin | Tiếng Việt';return}
 EX=EX.concat(r);save();LV='all';setD();$('ta').value='';$('msg').textContent=`Đã thêm ${r.length} câu.`;go(D.length-r.length)};
 $('clr').onclick=()=>{EX=[];save();setD();$('msg').textContent='Đã xóa các câu thêm.';go(0)};
